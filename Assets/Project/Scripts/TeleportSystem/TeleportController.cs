@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TeleportController : MonoBehaviour
 {
     [SerializeField] private Transform teleport_1, teleport_2;
+    [SerializeField] private float teleportCooldown;
+    public TMP_Text popUp;
     public Transform player;
-    private bool canTeleport;
+    public bool canTeleport;
 
     private void Start()
     {
         canTeleport = true;
+        popUp.gameObject.SetActive(false);
     }
 
     public void TeleportPlayer(string _teleportName)
@@ -30,7 +34,7 @@ public class TeleportController : MonoBehaviour
                 break;
         }
 
-        Invoke(nameof(ActiveTeleport), 0.5f);
+        Invoke(nameof(ActiveTeleport), teleportCooldown);
     }
 
     private void ActiveTeleport()
