@@ -10,11 +10,13 @@ public class TeleportController : MonoBehaviour
     public TMP_Text popUp;
     public Transform player;
     public bool canTeleport;
+    private AudioSource audioS;
 
     private void Start()
     {
         canTeleport = true;
         popUp.gameObject.SetActive(false);
+        audioS = GetComponent<AudioSource>();
     }
 
     public void TeleportPlayer(string _teleportName)
@@ -22,6 +24,7 @@ public class TeleportController : MonoBehaviour
         if (!canTeleport) return;
 
         canTeleport = false;
+        audioS.Play();
 
         switch (_teleportName)
         {

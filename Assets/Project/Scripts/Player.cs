@@ -12,6 +12,7 @@ public class Player : LifeController
     private bool canMove;
     private Vector2 dir;
     private Rigidbody2D rb;
+    private AudioSource audioS;
 
     [Header("Combat")]
     [SerializeField] private LayerMask enemyLayer;
@@ -27,6 +28,7 @@ public class Player : LifeController
 
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        audioS = GetComponent<AudioSource>();
 
         canMove = true;
     }
@@ -87,6 +89,7 @@ public class Player : LifeController
                 Debug.Log($"O inimigo {_enemy.name} levou dano");
             }
 
+        audioS.Play();
         Invoke(nameof(ReturnToMove), 0.2f);
     }
 
